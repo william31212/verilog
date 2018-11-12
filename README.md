@@ -3,3 +3,4 @@
 
 * [x] 3-bit-adder
 * [x] 6-bit-adder
+* [x] 2_bit_multipler
