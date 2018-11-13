@@ -32,9 +32,8 @@ module test(
 		//always @(negedge KEY[3])
 		//    A <= SW[15:0];
 		// I am adding this code to 
-		three_bit(cout,sum[2:0],SW[5:3],SW[2:0],1'b0);
-		assign sum[3]=cout;
-		assign sum[4]=1'b0;
+		three_bit(cout,sum[3:0],SW[3:0],SW[4],1'b0);
+		assign sum[4]=cout;
 		assign sum[5]=1'b0;
 		assign sum[6]=1'b0;
 		assign sum[7]=1'b0;
@@ -147,13 +146,24 @@ module f_adder(sum,cout,cin,inp1,inp2);
     or(cout,w2,w3);
 endmodule
 
-module three_bit(cout,sum,x,y,cin);
-    input [2:0] x,y;
+module three_bit(cout,sum,x,k,cin);
+    input [3:0] x,y;
     input cin;
-    output [3:0] sum;
+    output [4:0] sum;
     output cout;
     wire d1,d2,d3;
+    if (k == 1’b0) // minus
+        y[0] = 1;
+        y[1] = 0;
+        y[2] = 0;
+        y[3] = 0;
+    else
+        y[0] = 0;
+        y[1] = 1;
+        y[2] = 0;
+        y[3] = 0; 
     f_adder f1(sum[0],d1,x[0],y[0],cin);
     f_adder f2(sum[1],d2,x[1],y[1],d1);
-    f_adder f3(sum[2],cout,x[2],y[2],d2);
+    f_adder f3(sum[2],d3,x[2],y[2],d2);
+    f_adder f4(sum[3],cout,x[3],y[3],d3);
 endmodule
