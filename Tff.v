@@ -1,6 +1,6 @@
 // This is to start the multiply module
 // It begins here.
-module counter(
+module test(
 // Clock Input (50 MHz)
   input  CLOCK_50,
   //  Push Buttons
@@ -70,18 +70,18 @@ module countercode(D,clk,load,Q);//key[0] key[1]
 
     always@(negedge clk)//falling edge
         begin
-          if (~load)
+          if (~load)//沒按
            cnt = D;//灌新值
-          else 
-           cnt = Q;//依舊
+          else//有按
+           cnt = Q;//依舊，跳針
         end
 
         // c = cnt[2] , b = cnt[1] , a = cnt[0]
         // Ta = C'A' + AC
-        assign TA =(~cnt[2] & ~cnt[0]) | (~cnt[1] & ~cnt[0]);
+        assign TC =(~cnt[2] & ~cnt[0]) | (~cnt[1] & ~cnt[0]);
         // and(DA1, cnt[2],cnt[0]);   //  AC
         // or(DA2,DA1,~cnt[1]);       //  B' + AC
-        T_flip_flop(TA,clk,Q[2]);
+        T_flip_flop(TC,clk,Q[2]);
 
         // Tb = C'B' + CBA
         // and(DB1,cnt[2],cnt[0]);   // AC
@@ -94,8 +94,8 @@ module countercode(D,clk,load,Q);//key[0] key[1]
         // and(DC1,cnt[2],~cnt[1]);   //A'B
         // and(DC2,~cnt[2],cnt[1]);   //AB'
         // or(DC3,DC1,DC2);
-        assign TC = (~cnt[2] & cnt[1] & cnt[0]) | (cnt[2] & ~cnt[1]) | (cnt[2] & ~cnt[0]);
-        T_flip_flop(TC,clk,Q[0]);
+        assign TA = (~cnt[2] & cnt[1] & cnt[0]) | (cnt[2] & ~cnt[1]) | (cnt[2] & ~cnt[0]);
+        T_flip_flop(TA,clk,Q[0]); 
 endmodule 
 
 
@@ -104,33 +104,12 @@ module T_flip_flop(T,clock,Q);
     output Q;
     reg Q;
     always@(posedge clock)
-      if (~T) begin
-        Q <= Q;
-      end
-      else if (T) begin
-        Q <= !Q;
+      if (T == 1) 
+      begin
+        Q <= ~Q;
       end
 endmodule
 
-
-
-module T_flip_flop(T,clock,Q);
-    input F,clock;
-    output Q;
-    reg Q;
-
-    always@(posedge clock)
-    if (~reset)
-    begin
-        Q <= 1'b0
-    end
-    else if(F)
-    begin
-        Q <= !Q
-    end
-    end
-
-endmodule
 
 module hex_7seg(hex_digit,seg);
   input [3:0] hex_digit;
@@ -196,16 +175,16 @@ module add3(in,out);
     reg [3:0] out;  
     always @ (in)  
     case (in)  
-      	4'b0000: out <= 4'b0000;  
-      	4'b0001: out <= 4'b0001;  
-      	4'b0010: out <= 4'b0010;  
-      	4'b0011: out <= 4'b0011;  
-      	4'b0100: out <= 4'b0100;  
-      	4'b0101: out <= 4'b1000;  
-      	4'b0110: out <= 4'b1001;  
-      	4'b0111: out <= 4'b1010;  
-      	4'b1000: out <= 4'b1011;  
-      	4'b1001: out <= 4'b1100;  
-      	default: out <= 4'b0000;  
+        4'b0000: out <= 4'b0000;  
+        4'b0001: out <= 4'b0001;  
+        4'b0010: out <= 4'b0010;  
+        4'b0011: out <= 4'b0011;  
+        4'b0100: out <= 4'b0100;  
+        4'b0101: out <= 4'b1000;  
+        4'b0110: out <= 4'b1001;  
+        4'b0111: out <= 4'b1010;  
+        4'b1000: out <= 4'b1011;  
+        4'b1001: out <= 4'b1100;  
+        default: out <= 4'b0000;  
     endcase 
 endmodule

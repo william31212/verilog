@@ -1,6 +1,6 @@
 // This is to start the multiply module
 // It begins here.
-module test(
+module counter(
 // Clock Input (50 MHz)
   input  CLOCK_50,
   //  Push Buttons
@@ -70,46 +70,61 @@ module countercode(D,clk,load,Q);//key[0] key[1]
 
     always@(negedge clk)//falling edge
         begin
-          if (~load)//沒按
+          if (~load)
            cnt = D;//灌新值
-          else//有按
-           cnt = Q;//依舊，跳針
+          else 
+           cnt = Q;//依舊
         end
 
-        // c = cnt[2] , b = cnt[1] , a = cnt[0]
-        // Ta = C'A' + AC
-        assign TC =(~cnt[2] & ~cnt[0]) | (~cnt[1] & ~cnt[0]);
+        // Da = B' + AC
+        assign DA =(cnt[2] & cnt[0]) | (~cnt[0]);
         // and(DA1, cnt[2],cnt[0]);   //  AC
         // or(DA2,DA1,~cnt[1]);       //  B' + AC
-        T_flip_flop(TC,clk,Q[2]);
+        D_flip_flop(DA,clk,Q[2]);
 
-        // Tb = C'B' + CBA
+        // Db = AC +BC'
         // and(DB1,cnt[2],cnt[0]);   // AC
         // and(DB2,cnt[1],~cnt[0]);   //BC'
         // or(DB3,DB1,DB2);
-        assign TB = (~cnt[2] & ~cnt[1]) | (cnt[2] & cnt[1] & cnt[0]);
-        T_flip_flop(TB,clk,Q[1]);
+        assign DB = (cnt[2] & cnt[0]) | (cnt[1] & ~cnt[0]);
+        D_flip_flop(DB,clk,Q[1]);
 
-        // Tc = C'BA + CB' + CA'
+         // Dc = A'B + AB'
         // and(DC1,cnt[2],~cnt[1]);   //A'B
         // and(DC2,~cnt[2],cnt[1]);   //AB'
         // or(DC3,DC1,DC2);
-        assign TA = (~cnt[2] & cnt[1] & cnt[0]) | (cnt[2] & ~cnt[1]) | (cnt[2] & ~cnt[0]);
-        T_flip_flop(TA,clk,Q[0]); 
+        assign DC = ( ~cnt[2] & cnt[1]) | (cnt[2] & ~cnt[1]);
+        D_flip_flop(DC,clk,Q[0]);
 endmodule 
 
 
-module T_flip_flop(T,clock,Q);
-    input T, clock;
+module D_flip_flop(D,clock,Q);
+    input D, clock;
     output Q;
     reg Q;
     always@(posedge clock)
-      if (T == 1) 
-			begin
-			  Q <= ~Q;
-			end
+      Q <= D;//D = Q+
 endmodule
 
+
+
+module T_flip_flop(T,clock,Q);
+    input F,clock;
+    output Q;
+    reg Q;
+
+    always@(posedge clock)
+    if (~reset)
+    begin
+        Q <= 1'b0
+    end
+    else if(F)
+    begin
+        Q <= !Q
+    end
+    end
+
+endmodule
 
 module hex_7seg(hex_digit,seg);
   input [3:0] hex_digit;
