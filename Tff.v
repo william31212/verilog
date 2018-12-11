@@ -76,34 +76,40 @@ module countercode(D,clk,load,Q);//key[0] key[1]
            cnt = Q;//依舊
         end
 
-        // Da = B' + AC
-        assign DA =(cnt[2] & cnt[0]) | (~cnt[0]);
+        // c = cnt[2] , b = cnt[1] , a = cnt[0]
+        // Ta = C'A' + AC
+        assign TA =(~cnt[2] & ~cnt[0]) | (~cnt[1] & ~cnt[0]);
         // and(DA1, cnt[2],cnt[0]);   //  AC
         // or(DA2,DA1,~cnt[1]);       //  B' + AC
-        D_flip_flop(DA,clk,Q[2]);
+        T_flip_flop(TA,clk,Q[2]);
 
-        // Db = AC +BC'
+        // Tb = C'B' + CBA
         // and(DB1,cnt[2],cnt[0]);   // AC
         // and(DB2,cnt[1],~cnt[0]);   //BC'
         // or(DB3,DB1,DB2);
-        assign DB = (cnt[2] & cnt[0]) | (cnt[1] & ~cnt[0]);
-        D_flip_flop(DB,clk,Q[1]);
+        assign TB = (~cnt[2] & ~cnt[1]) | (cnt[2] & cnt[1] & cnt[0]);
+        T_flip_flop(TB,clk,Q[1]);
 
-         // Dc = A'B + AB'
+        // Tc = C'BA + CB' + CA'
         // and(DC1,cnt[2],~cnt[1]);   //A'B
         // and(DC2,~cnt[2],cnt[1]);   //AB'
         // or(DC3,DC1,DC2);
-        assign DC = ( ~cnt[2] & cnt[1]) | (cnt[2] & ~cnt[1]);
-        D_flip_flop(DC,clk,Q[0]);
+        assign TC = (~cnt[2] & cnt[1] & cnt[0]) | (cnt[2] & ~cnt[1]) | (cnt[2] & ~cnt[0]);
+        T_flip_flop(TC,clk,Q[0]);
 endmodule 
 
 
-module D_flip_flop(D,clock,Q);
-    input D, clock;
+module T_flip_flop(T,clock,Q);
+    input T, clock;
     output Q;
     reg Q;
     always@(posedge clock)
-      Q <= D;//D = Q+
+      if (~T) begin
+        Q <= Q;
+      end
+      else if (T) begin
+        Q <= !Q;
+      end
 endmodule
 
 
