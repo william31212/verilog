@@ -148,17 +148,17 @@ module countercode(D,clk,load,Q);
       end
   /**********************change here**********************/ 
   
-  assign Tx = (cnt[1]&cnt[0]);    
+  assign Tx = ;    
   
   T_FF(Tx,clk,Q[2]);
 
 
-  assign Ty = ((~cnt[1]&cnt[0]) | (~cnt[2]&cnt[1]));
+  assign Ty = ;
 
   T_FF(Ty,clk,Q[1]);
 
 
-  assign Tz = ((~cnt[1]&~cnt[0]) | (cnt[2]&cnt[1]));
+  assign Tz = ;
 
   T_FF(Tz,clk,Q[0]);
 
@@ -167,7 +167,6 @@ module countercode(D,clk,load,Q);
 
 endmodule 
   
-  ///////////////////change here//////////////////////////
 
 module T_FF(T,Clock,Q);
   

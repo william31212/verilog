@@ -139,6 +139,7 @@ module countercode(D,clk,load,Q);
   output [2:0] Q;
 
   reg [2:0] cnt;
+
   // X = cnt[2]  Y = cnt[1]  Z = cnt[0] 
   // X'= ~cnt[2] Y'= ~cnt[1] Z'= ~cnt[0]
 
@@ -152,17 +153,17 @@ module countercode(D,clk,load,Q);
     end
   /**********************change here**********************/ 
   
-  assign Dx = ((cnt[2]&~cnt[1]) | (~cnt[2]&cnt[1]&cnt[0]));    
+  assign Dx = ;    
 
   D_flip_flop(Dx,clk,Q[2]);
 
 
-  assign Dy = ((cnt[2]&cnt[0]) | (~cnt[1]&cnt[0]));
+  assign Dy = ;
 
   D_flip_flop(Dy,clk,Q[1]);
 
 
-  assign Dz = ((~cnt[1]) | (~cnt[2]&cnt[0]));
+  assign Dz = ;
 
   D_flip_flop(Dz,clk,Q[0]);
 
