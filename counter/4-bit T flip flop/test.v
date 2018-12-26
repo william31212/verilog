@@ -140,7 +140,7 @@ module countercode(D,clk,load,Q);
 
 
   //  X = cnt[3]  Y= cnt[2]   Z = cnt[1]  W = cnt[0] 
-  //  X'= ~cnt[3] Y = ~cnt[2] Z = ~cnt[1] W = ~cnt[0] 
+  //  X'= ~cnt[3] Y' = ~cnt[2] Z' = ~cnt[1] W' = ~cnt[0] 
   always@(negedge clk)
      begin
          if(~load)
