@@ -136,17 +136,15 @@ module countercode(D,clk,load,Q);
   input load;
   output [3:0] Q;
 
-  reg [3:0] cnt;
+  reg X,Y,Z,W;
 
 
-  //  X = cnt[3]  Y= cnt[2]   Z = cnt[1]  W = cnt[0] 
-  //  X'= ~cnt[3] Y' = ~cnt[2] Z' = ~cnt[1] W' = ~cnt[0] 
   always@(negedge clk)
      begin
          if(~load)
-           cnt = D;
+           {X,Y,Z,W} = D;
          else 
-           cnt = Q;
+           {X,Y,Z,W} = Q;
       end
  
   /**********************change here**********************/ 
