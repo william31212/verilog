@@ -139,15 +139,14 @@ module countercode(D,clk,load,Q);
   input load;
   output [3:0] Q;
 
-  reg [3:0] cnt;
-  //  X = cnt[3]  Y= cnt[2]   Z = cnt[1]  W = cnt[0] 
-  //  X'= ~cnt[3] Y = ~cnt[2] Z = ~cnt[1] W = ~cnt[0] 
+  reg X,Y,Z,W;
+
   always@(negedge clk)
    begin
        if(~load)
-        cnt = D;
+        {X,Y,Z,W} = D;
        else 
-        cnt = Q;
+        {X,Y,Z,W} = Q;
     end
     
 	/**********************change here**********************/ 
@@ -167,7 +166,7 @@ module countercode(D,clk,load,Q);
 
   assign Dw = ;
 
-  D_flip_flop(Dw, clk, Q[0]);
+  D_flip_flop(Dw,clk,Q[0]);
 	/**********************change here**********************/ 
 
 
