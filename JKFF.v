@@ -150,35 +150,35 @@ module countercode(D,clk,load,Q);
  
   /**********************change here**********************/ 
   
-  assign Xs = Y & Z & W;    
-  assign Xr = ~Y & W;   
+  assign Xj = ;    
+  assign Xk = ;   
 
-  SR_FF(Xs,Xr,clk,Q[3]);
-
-
-  assign Ys = ~Y & Z & W;    
-  assign Yr = Y & Z & W;
-
-  SR_FF(Ys,Yr,clk,Q[2]);
+  JK_ff(Xj,Xk,clk,Q[3]);
 
 
-  assign Zs = ~X & ~Z & W;
-  assign Zr = Z & W;
+  assign Yj = ;    
+  assign Yk = ;
 
-  SR_FF(Zs,Zr,clk,Q[1]);
+  JK_ff(Yj,Yk,clk,Q[2]);
 
-  assign Ws = ~W;
-  assign Wr = W;
 
-  SR_FF(Ws,Wr,clk,Q[0]);
+  assign Zj = ;
+  assign Zk = ;
+
+  JK_ff(Zj,Zk,clk,Q[1]);
+
+  assign Wj = ;
+  assign Wk = ;
+
+  JK_ff(Wj,Wk,clk,Q[0]);
 
 endmodule 
   
   /**********************change here**********************/ 
 
 
-module srff(s,r,clk,q);
-  input r,s,clk;
+module JK_ff(j,k,clk,q);
+  input j,k,clk;
   output q;
   
   initial
@@ -187,11 +187,11 @@ module srff(s,r,clk,q);
   end
   always @(posedge clk)
     begin
-      case({s,r})
-       {1'b0,1'b0}: begin q=q; end
-       {1'b0,1'b1}: begin q=1'b0;end
-       {1'b1,1'b0}: begin q=1'b1; end
-       {1'b1,1'b1}: begin q=1'bx; end
+      case({j,k})
+       {1'b0,1'b0}: begin q= q; end
+       {1'b0,1'b1}: begin q= 1'b0;end
+       {1'b1,1'b0}: begin q= 1'b1; end
+       {1'b1,1'b1}: begin q= ~q; end
       endcase
     end
 endmodule
