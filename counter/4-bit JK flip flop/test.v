@@ -180,7 +180,7 @@ endmodule
 module JK_ff(j,k,clk,q);
   input j,k,clk;
   output q;
-  
+  reg q;
   initial
   begin
     q = 1'b0;
