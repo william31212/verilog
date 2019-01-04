@@ -1,0 +1,48 @@
+Karnaugh Minimizer, Copyright © 2002-2007 ShurikSoft. All rights reserved.
+WWW:    http://karnaugh.shuriksoft.com
+Email:  support@shuriksoft.com
+
+
+END-USER LICENSE AGREEMENT 
+FOR THIS SOFTWARE
+Important - read carefully:
+
+
+License Agreement for Karnaugh Minimizer
+
+This license is a legal agreement between you and the
+author of Karnaugh Minimizer.  Your use of this software
+indicates your acceptance of this license agreement.
+
+
+Evaluation and Registration
+
+Karnaugh Minimizer is shareware, that means you can evaluate
+trial version of Karnaugh Minimizer with functional limitations 
+for 30 days at no charges. After that term ends if you still want 
+to use this program you should register your copy or remove
+all Karnaugh Minimizer files from your hard drive.
+By registering your copy you will support us to make it even more better for you!
+
+Each registration fee covers the use of one copy of
+this software to be used by one user at a time.
+
+Refer http://karnaugh.shuriksoft.com
+for registration details and volume discounts.
+
+
+Distribution
+
+This software may be distributed freely on online
+services, bulletin boards, or other electronic media
+as long as the files are distributed in their
+unmodified entirety.
+
+
+Disclaimer
+
+No warranty is made with respect of the software,
+its quality, performance, or fitness for any
+particular purpose. The software is supplied 'AS IS'.
+No responsibility will be accepted for any errors
+produced or the consequences of any erroneous results.

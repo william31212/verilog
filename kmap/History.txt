@@ -1,0 +1,74 @@
+History of Karnaugh Minimizer updates
+=====================================
+
+Legend:
+  += Added feature
+  -= Removed feature
+  *= Improved feature
+  x= Bug fixed.
+
+
+Date: 9.01.2005,   Version 2.0
+   *= Karnaugh Map control improved
+   *= Complete user interface redesign for WinXP
+   *= Report template became XSL powered
+   += Ability to print Karnaugh Map
+   += Ability to copy Karnaugh Map as bitmap image
+   += Truth Table can be loaded from tab delimited file, previously prepeared in MS Excel,
+      Don't care values can be specifyed in the table rows (Thanks to Dylan Verinder)
+   *= Many small changes and improvements
+
+Date: 5.15.2004,   Version 1.5.1
+   x= Export K-map to Sets representation bug fixed.
+   *= Tab order at variable names was corrected
+   += 2 input XOR/XNOR reduction added
+   (Many thanks to  Timothy J. Dell from IBM Server Development)
+
+Date: 2.10.2004,   Version 1.5
+   -= Advanced minimizer tool removed, this feature moved to Pro version.
+   += User interface improved.
+   += Support for Windows XP themes.
+   += AboutBox ReDesigned.
+   *= Size of installation package was reduced in about two times
+
+Date: 3.30.2003,   Version 1.4
+   += Plugins support was added
+   += Button "Convert to full Truth Table" added - convert
+      boolean formula to Thruth Table
+   += Fixed bug with  A*B*|B like terms this should simplify to 0,
+      since B*|B = 0 and A*0 = 0.  many thanks to Thomas Renbarger.
+
+Date: 12.1.2002,   Version 1.3
+   += Several Bugs fixed =+
+   += Some small features was added =+
+      + Columns Hex and Dec in Truth table
+      + Show decimal address of each cell on K-Map
+   += Syntax highlight for VHDL/Verilog =+
+   += Convert boolean formula to Verilog HDL code
+      Compatible with Active-HDL 5.2 by Aldec inc. http://www.aldec.com
+
+Date: 8.6.2002,   Version 1.2
+  += New Help System
+     based on compiled HTML code.
+  += Schematic creation tool =+
+     + Convert boolean formula to NAND or AND/OR schematic
+     + Support European and USA gate systems.
+     + Print or save as picture created schematic
+    += Advanced Minimization Tool =+
+     + New minimization algorithm added
+       Allow handle from 4 up to 23 variables
+     + Convert boolean formula to VHDL code
+       Compatible with design tools:
+        += Active-HDL by Aldec inc. http://www.aldec.com
+    += Several Bugs fixed =+
+     + Bug with truth table fixed.
+     + Full translation of the program interface
+     + Tips on startup
+
+Date: 4.5.2002,   Version 1.1
+  += Truth Table support 8 variables =+
+  += Report creation tool =+
+  += Several Bugs fixed =+
+
+Date: 2.10.2002,  Version 1.0
+  -= Initial release =-
