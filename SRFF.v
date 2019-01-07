@@ -180,7 +180,7 @@ endmodule
 module srff(s,r,clk,q);
   input r,s,clk;
   output q;
-  
+  reg q;
   initial
   begin
     q = 1'b0;
